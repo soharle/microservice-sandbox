@@ -33,9 +33,9 @@
     <script>
     let brokerBtn = document.getElementById("brokerBtn");
     let output = document.getElementById("output");
-    let sent = document.getElementById("payload);
+    let sent = document.getElementById("payload");
     let received = document.getElementById("received");
-
+    
     brokerBtn.addEventListener("click", function(){
         const body = {
             method: 'POST',
@@ -44,19 +44,19 @@
         fetch("http:\/\/localhost:5000", body)
         .then((response) => response.json())
         .then((data) => {
-            sent.innerHtml("empty post request");
-            received.innerHtml = JSON.stringify(data, undefined, 4);
+            sent.innerHTML = "empty post request";
+            received.innerHTML = JSON.stringify(data, undefined, 4);
             if (data.error) {
                 console.log(data.message);
             } else {
-                output.innerHtml += `<br><strong>Response from broker service</strong>: $(data.message)` 
+                output.innerHTML += `<br><strong>Response from broker service</strong>: ${data.message}` 
             }
         })
         .catch((error) => {
-            output.innerHtml += "<br><br>Error: " + error;
+            output.innerHTML += "<br><br>Error: " + error;
         })
-    })
 
+    })
 
     </script>
 {{end}}
