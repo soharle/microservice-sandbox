@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  front-end:
+    build:
+      context: ./../front-end
+      dockerfile: ./../front-end/front-end.dockerfile
+    restart: always
+    ports:
+      - "80:4000"
+    deploy:
+      mode: replicated
+      replicas: 1
   broker-service:
     build:
       context: ./../broker-service
@@ -11,3 +21,16 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+  postgres:
+    image: 'postgres:14.2'
+    ports:
+      - "5432:5432"
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: users
+    volumes:
+      - ./db-data/postgres/:/var/lib/postgresql/data/
