@@ -48,7 +48,7 @@ func (app *Config) HandleSubmission(w http.ResponseWriter, r *http.Request) {
 func (app *Config) authenticate(w http.ResponseWriter, authPayload AuthPayload) {
 	jsonData, _ := json.MarshalIndent(authPayload, "", "\t")
 
-	request, err := http.NewRequest("POST", "http://authentication-service/authenticate", bytes.NewBuffer(jsonData))
+	request, err := http.NewRequest("POST", "http://authentication-service:6000/authenticate", bytes.NewBuffer(jsonData))
 
 	if err != nil {
 		app.errorJSON(w, err)
